@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "88b42ece-6158-4acc-acef-36d9a2276fab",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 44,
+  "height": 47,
+  "platformSettings": {},
+  "subMetas": {
+    "t-rex-run-2": {
+      "ver": "1.0.4",
+      "uuid": "ac50b6e4-18c8-4312-a8eb-793c137d37d5",
+      "rawTextureUuid": "88b42ece-6158-4acc-acef-36d9a2276fab",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 44,
+      "height": 47,
+      "rawWidth": 44,
+      "rawHeight": 47,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
