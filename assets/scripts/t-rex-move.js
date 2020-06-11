@@ -3,7 +3,6 @@ const T_REX_STATUS_RUN = Symbol();
 const T_REX_STATUS_CROUCH = Symbol();
 const T_REX_STATUS_DEAD = Symbol();
 
-
 const SPRITE_SPEED = 5;
 const JUMP_SPEED = 400;
 const GRAVITY = 1000;
@@ -25,16 +24,17 @@ cc.Class({
         this.status = T_REX_STATUS_RUN;
 
         this.sprite = this.node.getComponent(cc.Sprite);
+        this.collider = this.node.getComponent(cc.PolygonCollider);
 
-        GameEvent.on(GameEventType.JUMP_START, () => {
+        GameEvent.on(GameEventType.T_REX_JUMP_START, () => {
             this.jump();
         });
 
-        GameEvent.on(GameEventType.CROUCH_START, () => {
+        GameEvent.on(GameEventType.T_REX_CROUCH_START, () => {
             this.crouchStart()
         });
 
-        GameEvent.on(GameEventType.CROUCH_END, () => {
+        GameEvent.on(GameEventType.T_REX_CROUCH_END, () => {
             this.crouchEnd()
         });
 
@@ -79,18 +79,12 @@ cc.Class({
         }
 
         const nextNode = nextNodes[idx];
-        const nextSprite = nextNode.getComponent(cc.Sprite);
 
+        const nextSprite = nextNode.getComponent(cc.Sprite);
         this.sprite.spriteFrame = nextSprite.spriteFrame;
 
-        switch (this.status) {
-            case T_REX_STATUS_CROUCH:
-                this.node.y = this.initY - 10;
-                break;
-            case T_REX_STATUS_RUN:
-                this.node.y = this.initY;
-                break;
-        }
+        const nextCollider = nextNode.getComponent(cc.PolygonCollider);
+        this.collider.points = nextCollider.points;
 
         this.spriteIdx++;
     },
@@ -141,5 +135,10 @@ cc.Class({
         }
 
         this.status = T_REX_STATUS_RUN;
+    },
+
+    onCollisionEnter: function (other, self) {
+        console.log('dead');
+        GameEvent.emit(GameEventType.T_REX_DEAD);
     },
 });

@@ -7,10 +7,12 @@ cc.Class({
         window.GameEvent = new cc.EventTarget();
 
         window.GameEventType = {
-            JUMP_START: "JUMP_START",
-            JUMP_END: "JUMP_END",
-            CROUCH_START: "CROUCH_START",
-            CROUCH_END: "CROUCH_END",
+            T_REX_START: 'T_REX_START',
+            T_REX_JUMP_START: 'T_REX_JUMP_START',
+            T_REX_JUMP_END: 'T_REX_JUMP_END',
+            T_REX_CROUCH_START: 'T_REX_CROUCH_START',
+            T_REX_CROUCH_END: 'T_REX_CROUCH_END',
+            T_REX_DEAD: 'T_REX_DEAD',
         };
     }
 
