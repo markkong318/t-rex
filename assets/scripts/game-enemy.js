@@ -1,6 +1,6 @@
 const SECOND_INIT = 3;
-const SECOND_BASE = 1.5;
-const SECOND_OFFSET = 0.5;
+const SECOND_BASE = 1.3;
+const SECOND_OFFSET = 0.7;
 
 cc.Class({
     extends: cc.Component,
@@ -16,6 +16,23 @@ cc.Class({
             this.clean();
             this.startCounter();
         });
+
+        this.pool = [];
+
+        for (let i = 0; i < this.enemies.length; i++) {
+            const enemy = this.enemies[i];
+
+            const parent = cc.find("Canvas/Enemy");
+
+            const node = cc.instantiate(enemy);
+            node.parent = parent;
+
+            node.on(NodeEventType.ENEMY_DEACTIVE, () => {
+                this.pool.push(node);
+            });
+
+            this.pool.push(node);
+        }
     },
 
     startCounter: function() {
@@ -36,16 +53,12 @@ cc.Class({
     },
 
     lottery: function() {
-        const parent = cc.find("Canvas/Enemy");
+        const idx = Math.floor(Math.random() * this.pool.length);
+        const node = this.pool[idx];
 
-        const idx = Math.floor(Math.random() * this.enemies.length);
-        const enemy = this.enemies[idx];
+        this.pool.splice(idx, 1);
 
-        const node = cc.instantiate(enemy);
-        // node.active = true;
-        node.parent = parent;
         node.emit(NodeEventType.ENEMY_ACTIVE);
-
     },
 
     clean: function() {
@@ -53,8 +66,8 @@ cc.Class({
 
         for (let i = 0; i < parent.children.length; i++) {
             const child = parent.children[i];
-            child.active = false;
-            child.destroy();
+
+            child.emit(NodeEventType.ENEMY_HIDE);
         }
     }
 });

@@ -20,6 +20,8 @@ cc.Class({
 
         window.NodeEventType = {
             ENEMY_ACTIVE: 'ENEMY_ACTIVE',
+            ENEMY_DEACTIVE: 'ENEMY_DEACTIVE',
+            ENEMY_HIDE: 'ENEMY_HIDE',
         };
     }
 

@@ -36,6 +36,10 @@ cc.Class({
             this.startPosition();
             this.isEnemy = true;
         });
+
+        this.node.on(NodeEventType.ENEMY_HIDE, () => {
+            this.hide()
+        })
     },
 
     update: function() {
@@ -73,7 +77,11 @@ cc.Class({
         const size = cc.view.getDesignResolutionSize();
 
         if (this.node.x < - size.width / 2 - this.node.width / 2) {
-            this.node.destroy();
+            this.isEnemy = false;
+
+            console.log("has event " + this.node.hasEventListener(NodeEventType.ENEMY_DEACTIVE));
+
+            this.node.emit(NodeEventType.ENEMY_DEACTIVE);
         }
 
         this.node.x -= this.speed;
@@ -96,5 +104,11 @@ cc.Class({
                 this.node.y = FLY_HIGH_Y;
                 break;
         }
+    },
+
+    hide: function() {
+        const size = cc.view.getDesignResolutionSize();
+
+        this.node.x = - size.width / 2 - this.node.width / 2;
     },
 });
