@@ -23,9 +23,9 @@ cc.Class({
 
         this.node.x -= VELOCITY_INIT;
 
-        this.node.on(NodeEventType.ENEMY_RESTART, () => {
-            this.restart();
-        });
+        // this.node.on(NodeEventType.ENEMY_RESTART, () => {
+        //     this.restart();
+        // });
     },
 
     remove: function() {

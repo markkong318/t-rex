@@ -10,6 +10,15 @@ cc.Class({
     },
 
     start: function() {
+        this.startCounter();
+
+        GameEvent.on(GameEventType.T_REX_START, () => {
+            this.clean();
+            this.startCounter();
+        });
+    },
+
+    startCounter: function() {
         this.counter = 0;
         this.counterMax = 3;
     },
@@ -27,14 +36,23 @@ cc.Class({
     },
 
     lottery: function() {
-        const canvas = cc.find("Canvas");
-        
+        const parent = cc.find("Canvas/Enemy");
 
         const idx = Math.floor(Math.random() * this.enemies.length);
         const enemy = this.enemies[idx];
 
         const node = cc.instantiate(enemy);
         node.active = true;
-        node.parent = canvas;
+        node.parent = parent;
+    },
+
+    clean: function() {
+        const parent = cc.find("Canvas/Enemy");
+
+        for (let i = 0; i < parent.children.length; i++) {
+            const child = parent.children[i];
+            child.active = false;
+            child.destroy();
+        }
     }
 });

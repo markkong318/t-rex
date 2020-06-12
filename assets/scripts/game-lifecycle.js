@@ -12,9 +12,10 @@ cc.Class({
         });
 
         GameEvent.on(GameEventType.T_REX_START, () => {
-
-
             cc.director.resume();
+
+            const gameOver = cc.find('Canvas/GameOver');
+            gameOver.active = false;
         });
     }
 

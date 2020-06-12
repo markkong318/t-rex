@@ -21,5 +21,7 @@ cc.Class({
         if ((this.startX - this.node.x) > this.node.width / 2) {
             this.node.x = this.startX;
         }
+
+        GameEvent.emit(GameEventType.T_REX_MOVE_DISTANCE, { distance: this.velocity });
     }
 });

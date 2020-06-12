@@ -25,12 +25,6 @@ cc.Class({
         this.sprite = this.node.getComponent(cc.Sprite);
         this.collider = this.node.getComponent(cc.PolygonCollider);
 
-        // this.node.on(NodeEventType.ENEMY_RESTART, () => {
-        //     this.restart();
-        // });
-
-        // GameEvent.emit(GameEventType.ENEMY_EXIT, {node: this.node});
-
         this.startPosition();
     },
 
@@ -65,7 +59,6 @@ cc.Class({
         const size = cc.view.getDesignResolutionSize();
 
         if (this.node.x < - size.width / 2 - this.node.width / 2) {
-            // return;
             this.node.destroy();
         }
 
