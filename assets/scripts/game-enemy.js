@@ -1,6 +1,6 @@
 const SECOND_INIT = 3;
-const SECOND_BASE = 4;
-const SECOND_OFFSET = 1.5;
+const SECOND_BASE = 1.5;
+const SECOND_OFFSET = 0.5;
 
 cc.Class({
     extends: cc.Component,
@@ -20,7 +20,7 @@ cc.Class({
 
     startCounter: function() {
         this.counter = 0;
-        this.counterMax = 3;
+        this.counterMax = SECOND_INIT;
     },
 
     update: function(dt) {
@@ -42,8 +42,10 @@ cc.Class({
         const enemy = this.enemies[idx];
 
         const node = cc.instantiate(enemy);
-        node.active = true;
+        // node.active = true;
         node.parent = parent;
+        node.emit(NodeEventType.ENEMY_ACTIVE);
+
     },
 
     clean: function() {

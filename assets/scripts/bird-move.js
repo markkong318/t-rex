@@ -1,5 +1,4 @@
-const INIT_Y = 11;
-const VELOCITY_INIT = 5;
+const SPEED_INIT = 5;
 
 const FRAME_SPEED = 15;
 
@@ -18,17 +17,32 @@ cc.Class({
         flyNodes: [cc.Node],
     },
 
-    start: function() {
+    onLoad: function() {
         this.frameCounter = 0;
         this.frameIdx = 0;
+
+        this.speed = window.speed;
 
         this.sprite = this.node.getComponent(cc.Sprite);
         this.collider = this.node.getComponent(cc.PolygonCollider);
 
-        this.startPosition();
+        GameEvent.on(GameEventType.ALL_UPDATE_SPEED, ({ speed }) => {
+            this.speed = speed;
+        });
+
+        this.isEnemy = false;
+
+        this.node.on(NodeEventType.ENEMY_ACTIVE, () => {
+            this.startPosition();
+            this.isEnemy = true;
+        });
     },
 
     update: function() {
+        if (!this.isEnemy) {
+            return;
+        }
+
         this.updateFrame();
         this.updatePosition();
     },
@@ -62,7 +76,7 @@ cc.Class({
             this.node.destroy();
         }
 
-        this.node.x -= VELOCITY_INIT;
+        this.node.x -= this.speed;
     },
 
     startPosition: function() {
@@ -82,13 +96,5 @@ cc.Class({
                 this.node.y = FLY_HIGH_Y;
                 break;
         }
-
-        console.log("fly id: "+ flyId);
-    },
-
-    remove: function() {
-        const size = cc.view.getDesignResolutionSize();
-
-        this.node.x = - size.width / 2;
     },
 });

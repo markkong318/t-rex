@@ -1,4 +1,4 @@
-const VELOCITY_INIT = 5;
+const SPEED_INIT = 5;
 
 cc.Class({
     extends: cc.Component,
@@ -10,18 +10,22 @@ cc.Class({
         const size = cc.view.getDesignResolutionSize();
 
         this.startX = this.node.width / 2 - size.width / 2;
-        this.velocity = VELOCITY_INIT;
+        this.speed = SPEED_INIT;
 
         this.node.x = this.startX;
+
+        GameEvent.on(GameEventType.ALL_UPDATE_SPEED, ({ speed }) => {
+            this.speed = speed;
+        });
     },
 
     update: function() {
-        this.node.x -= this.velocity;
+        this.node.x -= this.speed;
 
         if ((this.startX - this.node.x) > this.node.width / 2) {
             this.node.x = this.startX;
         }
 
-        GameEvent.emit(GameEventType.T_REX_MOVE_DISTANCE, { distance: this.velocity });
+        GameEvent.emit(GameEventType.T_REX_MOVE_DISTANCE, { distance: this.speed });
     }
 });

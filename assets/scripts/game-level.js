@@ -6,16 +6,25 @@ cc.Class({
     properties: {},
 
     onLoad: function() {
-        let speed = SPEED_INIT;
+        window.speed = SPEED_INIT;
+
 
         const callback = () => {
-            speed += 0.5;
+            window.speed += 0.1;
+
+            console.log('speed update: ' + speed);
+
+            GameEvent.emit(GameEventType.ALL_UPDATE_SPEED, { speed });
         };
 
         GameEvent.on(GameEventType.T_REX_START, () => {
-            speed = SPEED_INIT;
+            window.speed = SPEED_INIT;
+
+            this.schedule(callback, 1);
         });
 
-
+        GameEvent.on(GameEventType.T_REX_DEAD, () => {
+            this.unschedule(callback);
+        })
     }
 });

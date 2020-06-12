@@ -14,7 +14,12 @@ cc.Class({
             T_REX_CROUCH_END: 'T_REX_CROUCH_END',
             T_REX_DEAD: 'T_REX_DEAD',
             T_REX_MOVE_DISTANCE: 'T_REX_MOVE_DISTANCE',
-            ALL_LEVEL_UP: 'ALL_LEVEL_UP'
+            ALL_UPDATE_SPEED: 'ALL_SPEED_UP',
+            ALL_FETCH_SPEED: 'ALL_FETCH_SPEED',
+        };
+
+        window.NodeEventType = {
+            ENEMY_ACTIVE: 'ENEMY_ACTIVE',
         };
     }
 

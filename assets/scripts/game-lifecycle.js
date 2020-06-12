@@ -17,6 +17,9 @@ cc.Class({
             const gameOver = cc.find('Canvas/GameOver');
             gameOver.active = false;
         });
-    }
+    },
 
+    start: function(){
+        GameEvent.emit(GameEventType.T_REX_START);
+    },
 });
