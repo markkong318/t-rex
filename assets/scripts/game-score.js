@@ -1,3 +1,5 @@
+const KEY = 't-rex-hi-score';
+
 cc.Class({
     extends: cc.Component,
 
@@ -7,7 +9,7 @@ cc.Class({
     },
 
     onLoad: function() {
-        this.hiScore = 0;
+        this.hiScore = cc.sys.localStorage.getItem(KEY) || 0;
         this.nowScore = 0;
 
         this.hiScorePlaying = false;
@@ -52,6 +54,8 @@ cc.Class({
             }
 
             this.hiScore = this.nowScore;
+
+            cc.sys.localStorage.setItem(KEY, this.nowScore);
 
             this.updateScore();
             this.playHiScore();

@@ -24,7 +24,7 @@ cc.Class({
         this.status = T_REX_STATUS_RUN;
 
         this.sprite = this.node.getComponent(cc.Sprite);
-        this.collider = this.node.getComponent(cc.PolygonCollider);
+        this.collider = this.node.getComponent(cc.BoxCollider);
 
         GameEvent.on(GameEventType.T_REX_JUMP_START, () => {
             this.jump();
@@ -38,7 +38,7 @@ cc.Class({
             this.crouchEnd()
         });
 
-        this.velocityY = 0;
+        this.speedY = 0;
         this.initY = this.node.y;
     },
 
@@ -83,8 +83,9 @@ cc.Class({
         const nextSprite = nextNode.getComponent(cc.Sprite);
         this.sprite.spriteFrame = nextSprite.spriteFrame;
 
-        const nextCollider = nextNode.getComponent(cc.PolygonCollider);
-        this.collider.points = nextCollider.points;
+        const nextCollider = nextNode.getComponent(cc.BoxCollider);
+        this.collider.offset = nextCollider.offset;
+        this.collider.size = nextCollider.size;
 
         this.spriteIdx++;
     },
@@ -94,9 +95,9 @@ cc.Class({
             return;
         }
 
-        this.velocityY = this.velocityY - GRAVITY * dt;
+        this.speedY = this.speedY - GRAVITY * dt;
 
-        this.node.y += this.velocityY * dt;
+        this.node.y += this.speedY * dt;
 
         if (this.node.y < this.initY) {
             this.node.y = this.initY;
@@ -111,10 +112,10 @@ cc.Class({
 
         switch (this.status) {
             case T_REX_STATUS_RUN:
-                this.velocityY = JUMP_SPEED;
+                this.speedY = JUMP_SPEED;
                 break;
             case T_REX_STATUS_JUMP:
-                this.velocityY = -JUMP_SPEED;
+                this.speedY = -JUMP_SPEED;
                 break;
         }
 
@@ -138,7 +139,6 @@ cc.Class({
     },
 
     onCollisionEnter: function (other, self) {
-        console.log('dead');
         GameEvent.emit(GameEventType.T_REX_DEAD);
     },
 });

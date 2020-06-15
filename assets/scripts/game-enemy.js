@@ -47,8 +47,6 @@ cc.Class({
             this.lottery();
             this.counter = 0;
             this.counterMax = SECOND_BASE + (Math.random() * SECOND_OFFSET - SECOND_OFFSET / 2);
-
-            console.log("next counter: " + this.counterMax);
         }
     },
 

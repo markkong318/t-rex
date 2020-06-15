@@ -1,12 +1,18 @@
-const VELOCITY_INIT = 1;
-
 cc.Class({
     extends: cc.Component,
 
     properties: {},
 
+    onLoad: function() {
+        this.speed = window.speed / 5;
+
+        GameEvent.on(GameEventType.ALL_UPDATE_SPEED, ({ speed }) => {
+            this.speed = speed / 5;
+        });
+    },
+
     update: function() {
-        this.node.x -= VELOCITY_INIT;
+        this.node.x -= this.speed;
 
         const size = cc.view.getDesignResolutionSize();
 

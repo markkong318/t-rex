@@ -1,5 +1,3 @@
-const SPEED_INIT = 5;
-
 const FRAME_SPEED = 15;
 
 const FLY_LOW_ID = 0;
@@ -24,7 +22,7 @@ cc.Class({
         this.speed = window.speed;
 
         this.sprite = this.node.getComponent(cc.Sprite);
-        this.collider = this.node.getComponent(cc.PolygonCollider);
+        this.collider = this.node.getComponent(cc.BoxCollider);
 
         GameEvent.on(GameEventType.ALL_UPDATE_SPEED, ({ speed }) => {
             this.speed = speed;
@@ -67,8 +65,9 @@ cc.Class({
         const nextSprite = nextNode.getComponent(cc.Sprite);
         this.sprite.spriteFrame = nextSprite.spriteFrame;
 
-        const nextCollider = nextNode.getComponent(cc.PolygonCollider);
-        this.collider.points = nextCollider.points;
+        const nextCollider = nextNode.getComponent(cc.BoxCollider);
+        this.collider.offset = nextCollider.offset;
+        this.collider.size = nextCollider.size;
 
         this.frameIdx++;
     },
@@ -78,8 +77,6 @@ cc.Class({
 
         if (this.node.x < - size.width / 2 - this.node.width / 2) {
             this.isEnemy = false;
-
-            console.log("has event " + this.node.hasEventListener(NodeEventType.ENEMY_DEACTIVE));
 
             this.node.emit(NodeEventType.ENEMY_DEACTIVE);
         }

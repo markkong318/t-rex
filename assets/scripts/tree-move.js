@@ -1,6 +1,5 @@
 const INIT_BIG_Y = 18;
 const INIT_SMALL_Y = 11;
-const SPEED_INIT = 5;
 
 const TREE_TYPE = cc.Enum ({
     BIG: 0,
@@ -24,7 +23,6 @@ cc.Class({
 
         GameEvent.on(GameEventType.ALL_UPDATE_SPEED, ({ speed }) => {
             this.speed = speed;
-            console.log('tree speed:' + this.speed)
         });
 
         this.isEnemy = false;
@@ -64,8 +62,6 @@ cc.Class({
         if (this.node.x < - size.width / 2 - this.node.width / 2) {
             this.isEnemy = false;
 
-            console.log("has event " + this.node.hasEventListener(NodeEventType.ENEMY_DEACTIVE));
-
             this.node.emit(NodeEventType.ENEMY_DEACTIVE);
         }
 
@@ -76,7 +72,5 @@ cc.Class({
         const size = cc.view.getDesignResolutionSize();
 
         this.node.x = - size.width / 2 - this.node.width / 2;
-
-        console.log('hide')
     },
 });

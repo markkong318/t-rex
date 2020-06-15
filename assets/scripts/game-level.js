@@ -12,8 +12,6 @@ cc.Class({
         const callback = () => {
             window.speed += 0.1;
 
-            console.log('speed update: ' + speed);
-
             GameEvent.emit(GameEventType.ALL_UPDATE_SPEED, { speed });
         };
 

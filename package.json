@@ -1,0 +1,23 @@
+{
+  "name": "t-rex",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "gh-pages -d build/web-mobile"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/markkong318/t-rex.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/markkong318/t-rex/issues"
+  },
+  "homepage": "https://github.com/markkong318/t-rex#readme",
+  "devDependencies": {
+    "gh-pages": "^3.0.0"
+  }
+}
