@@ -141,7 +141,7 @@ window.boot = function () {
     // jsList
     var jsList = settings.jsList;
 
-    var bundledScript = settings.debug ? 'src/project.dev.js' : 'src/project.8e75f.js';
+    var bundledScript = settings.debug ? 'src/project.dev.js' : 'src/project.56fe8.js';
     if (jsList) {
         jsList = jsList.map(function (x) {
             return 'src/' + x;
