@@ -36,8 +36,8 @@ cc.Class({
         });
 
         this.node.on(NodeEventType.ENEMY_HIDE, () => {
-            this.hide()
-        })
+            this.hide();
+        });
     },
 
     update: function() {
@@ -73,9 +73,7 @@ cc.Class({
     },
 
     updatePosition: function() {
-        const size = cc.view.getDesignResolutionSize();
-
-        if (this.node.x < - size.width / 2 - this.node.width / 2) {
+        if (this.node.x < - this.node.parent.parent.width / 2 - this.node.width / 2) {
             this.isEnemy = false;
 
             this.node.emit(NodeEventType.ENEMY_DEACTIVE);
@@ -85,9 +83,7 @@ cc.Class({
     },
 
     startPosition: function() {
-        const size = cc.view.getDesignResolutionSize();
-
-        this.node.x = size.width / 2;
+        this.node.x = this.node.parent.parent.width / 2 + this.node.width / 2;
 
         const flyId = Math.floor(Math.random() * 3);
         switch (flyId) {
@@ -104,8 +100,6 @@ cc.Class({
     },
 
     hide: function() {
-        const size = cc.view.getDesignResolutionSize();
-
-        this.node.x = - size.width / 2 - this.node.width / 2;
+        this.node.x = - this.node.parent.parent.width / 2 - this.node.width / 2;
     },
 });

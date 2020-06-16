@@ -33,14 +33,12 @@ cc.Class({
         });
 
         this.node.on(NodeEventType.ENEMY_HIDE, () => {
-            this.hide()
-        })
+            this.hide();
+        });
     },
 
     startPosition: function() {
-        const size = cc.view.getDesignResolutionSize();
-
-        this.node.x = size.width / 2;
+        this.node.x = this.node.parent.parent.width / 2 + this.node.width / 2;
 
         switch (this.treeType) {
             case TREE_TYPE.BIG:
@@ -57,9 +55,7 @@ cc.Class({
             return;
         }
 
-        const size = cc.view.getDesignResolutionSize();
-
-        if (this.node.x < - size.width / 2 - this.node.width / 2) {
+        if (this.node.x < - this.node.parent.parent.width / 2 - this.node.width / 2) {
             this.isEnemy = false;
 
             this.node.emit(NodeEventType.ENEMY_DEACTIVE);
@@ -69,8 +65,6 @@ cc.Class({
     },
 
     hide: function() {
-        const size = cc.view.getDesignResolutionSize();
-
-        this.node.x = - size.width / 2 - this.node.width / 2;
+        this.node.x = - this.node.parent.parent.width / 2 - this.node.width / 2;
     },
 });

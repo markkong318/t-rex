@@ -31,6 +31,8 @@ cc.Class({
                 this.pool.push(node);
             });
 
+            node.emit(NodeEventType.ENEMY_HIDE);
+
             this.pool.push(node);
         }
     },

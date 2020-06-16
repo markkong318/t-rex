@@ -14,10 +14,8 @@ cc.Class({
     update: function() {
         this.node.x -= this.speed;
 
-        const size = cc.view.getDesignResolutionSize();
-
-        if (this.node.x < - size.width / 2) {
-            this.node.x += size.width;
+        if (this.node.x < - this.node.parent.width / 2 - this.node.width / 2) {
+            this.node.x += this.node.parent.width + this.node.width / 2;
         }
     },
 });
