@@ -9,10 +9,6 @@ Cocos Creator version: 2.3.3
 
 https://markkong318.github.io/t-rex/
 
-## Asset
-
-The ball asset is from gamesupplyofficial@gmail.com
-
 ## Copyright
 
 Not allowed for commercial use
